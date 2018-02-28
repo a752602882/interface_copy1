@@ -9,7 +9,7 @@ class OperationJson:
 
     #读取json文件
     def read_json(self):
-        with open("../dataConfig/user.json") as fp:
+        with open("../DataConfig/user.json") as fp:
             data = json.load(fp)
         return  data
 

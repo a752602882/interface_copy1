@@ -8,7 +8,7 @@ class Data_Config:
       request_way = 4
       header = 5
       case_depend = 6
-      data_depend = 7
+      key_depend = 7
       field_depend = 8
       data =9
       expect=10
@@ -20,10 +20,10 @@ def get_id():
 def get_url():
     return Data_Config.url
 
-def get_run():
+def get_is_run():
     return Data_Config.is_run
 
-def get_run_way():
+def get_request_way():
     return Data_Config.request_way
 
 def get_header():
@@ -32,8 +32,8 @@ def get_header():
 def get_case_depend():
     return Data_Config.case_depend
 
-def get_data_depend():
-    return Data_Config.data_depend
+def get_key_depend():
+    return Data_Config.key_depend
 
 def get_field_depend():
     return Data_Config.field_depend
