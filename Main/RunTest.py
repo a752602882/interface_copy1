@@ -2,6 +2,7 @@
 from Logic.DependData import DependData
 from Logic.GetData import GetData
 from Logic.RunMethod import RunMethod
+from Unit.OperationHeader import OperationHeader
 from Unit.CommonUnit import CommonUnit
 from Unit.OperationJson import OperationJson
 
@@ -14,7 +15,8 @@ class RunTest:
 
 
     def go_to_run(self):
-
+       pass_count = []
+       fail_count = []
        row_count = self.data.get_case_size()
        for i in range(1,row_count):
            is_run  = self.data.get_is_run(i)
@@ -33,13 +35,33 @@ class RunTest:
                    field_depend = self.data.get_field_depend(i)
                    request_data[field_depend] = depend_response_data
 
+               if header == 'write':
+                   res = self.runMethod.run_main(method,url,request_data)
+                   op_header = OperationHeader(res)
+                   op_header.write_cookie()
+               elif header=='yes':
+                   op_json =OperationJson('../DataConfig/cookie.json')
+                   cookie = op_json.get_data('apsid')
+                   cookies = {
+                       'apsid':cookie
+                   }
+                   res= self.runMethod.run_main(method,url,request_data,cookies)
+               else:
+                   res = self.runMethod.run_main(method,url,request_data)
 
-               res = self.runMethod.run_main(method,url,request_data)
-
-               if self.comm.is_contain(expect,res):
+               print res
+               if self.comm.is_equal_dict(expect,res):
                    self.data.write_result(i,"pass")
+                   pass_count.append(i)
                else:
                    self.data.write_result(i,'fail')
+                   pass_count.append(i)
+               #self.send_mai.send_mainsend_main(pass_count,fail_count)
+
+
+
+
+
 
 
 

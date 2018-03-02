@@ -58,7 +58,7 @@ class GetData:
 
 
     def get_field_depend(self,row):
-        col = Data_Config.get_case_depend()
+        col = Data_Config.get_field_depend()
         field = self.oper_execl.get_cell_value(row,col)
         if field =='':
             return  None
